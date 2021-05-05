@@ -66,7 +66,7 @@ const SignUp:React.FC = () => {
         description: 'Ocorreu um erro ao fazer login, cheque as credenciais'
       });
     }
-  }, [signIn, addToast, history]);
+  }, [addToast, history]);
 
   return (
     <Container>
