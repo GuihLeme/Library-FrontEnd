@@ -5,7 +5,6 @@ import { FiLock, FiMail, FiUser } from 'react-icons/fi';
 import * as Yup from 'yup';
 
 import Input from '../../components/Input';
-import { useAuth } from '../../hooks/AuthContext';
 
 import { Container } from '../../styles/pages/SignUp';
 import { useToast } from '../../hooks/ToastContext';
@@ -23,7 +22,6 @@ interface SignUpFormData {
 const SignUp:React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
 
