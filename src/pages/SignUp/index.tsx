@@ -10,6 +10,8 @@ import { useAuth } from '../../hooks/AuthContext';
 import { Container } from '../../styles/pages/SignUp';
 import { useToast } from '../../hooks/ToastContext';
 import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
+import { useHistory } from 'react-router';
 
 interface SignUpFormData {
   name: string;
@@ -23,6 +25,7 @@ const SignUp:React.FC = () => {
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
+  const history = useHistory();
 
   const handleSubmit = useCallback(async (data: SignUpFormData) => {
     try {
@@ -39,10 +42,9 @@ const SignUp:React.FC = () => {
         abortEarly: false,
       });
 
-      await signIn({
-        email: data.email,
-        password: data.password,
-      });
+      await api.post('/admin/', data)
+
+      history.push('/')
 
       addToast({
         type: 'success',
@@ -64,7 +66,7 @@ const SignUp:React.FC = () => {
         description: 'Ocorreu um erro ao fazer login, cheque as credenciais'
       });
     }
-  }, [signIn, addToast]);
+  }, [signIn, addToast, history]);
 
   return (
     <Container>
@@ -82,10 +84,10 @@ const SignUp:React.FC = () => {
               <Input type="text" icon={FiMail} name="email" placeholder="E-mail"/>
             </div>
             <div className='input'>
-              <Input type="text" icon={FiLock} name="password" placeholder="Senha"/>
+              <Input type="password" icon={FiLock} name="password" placeholder="Senha"/>
             </div>
             <div className='input'>
-              <Input type="text" icon={FiLock} name="pasword_confirmation" placeholder="Confirmar senha"/>
+              <Input type="password" icon={FiLock} name="pasword_confirmation" placeholder="Confirmar senha"/>
             </div>
 
             <button type="submit">Cadastrar</button>

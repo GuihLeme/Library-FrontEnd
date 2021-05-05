@@ -11,6 +11,7 @@ import { useAuth } from '../../hooks/AuthContext';
 import { useToast } from '../../hooks/ToastContext';
 
 import { Container } from '../../styles/pages/Home';
+import { Link } from 'react-router-dom';
 
 interface SignInFormData {
   email: string;
@@ -83,7 +84,7 @@ const SignIn:React.FC = () => {
             <div className="register">
               <p>
                 Não possui uma conta ainda?
-                <a href="/SignUp">Criar conta </a>
+                <Link to="/sign-up">Criar conta </Link>
               </p>
             </div>
 
